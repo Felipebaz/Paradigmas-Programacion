@@ -37,5 +37,47 @@ const redondear = (precio: number): number => Math.round(precio * 100) / 100;
 const pipe = <T>(...fns: Array<(arg: T) => T>) => 
 (value: T) => fns.reduce((acc, fn) => fn(acc), value);
 
-const calcularPrecioFinal = pipe(agregarIVA, descuento, redondear);
-console.log(calcularPrecioFinal(100)); // resultado: 108.9  
+const calcularPrecioFinal = pipe(descuento, agregarIVA, redondear);
+console.log(calcularPrecioFinal(100)); // resultado: 108.9
+
+
+//Metodos funcionales para arrays: map, filter, reduce, etc. Estos métodos permiten manipular arrays de manera declarativa y sin mutar el array original.
+
+const productos = [
+    {nombre: "Laptop", precio: 1000, categoria: "Tech"},
+    {nombre: "Mesa", precio: 200, categoria: "Muebles"},
+    {nombre: "mouse", precio: 50, categoria: "Tech"}
+];
+//Transformar  (map)
+const nombres = productos.map(p => p.nombre);
+
+//Filtrar (filter)
+const tech = productos.filter(p => p.categoria === "Tech");
+
+//Reducir (reduce)
+const total = productos.reduce((sum, p) => sum + p.precio, 0);
+
+// Combinar metodos
+const preciosTechConIVA = productos
+    .filter(p => p.categoria === "Tech")
+    .map(p => agregarIVA(p.precio))
+    .reduce((sum, precio) => sum + precio, 0);
+
+
+// flatMap, some, every
+const pedidos = [
+    {id: 1, productos: ["Laptop", "Mouse"]},
+    {id: 2, productos: ["Mesa"]},
+    {id: 3, productos: ["Laptop", "Teclado"]}
+];
+
+// flatMap para aplanar y transformar
+const todosLosProductops = pedidos.flatMap(p => p.productos);
+
+// some para verificar si al menos un pedido contiene "Laptop"
+const hayTech = productos.some(p => p.categoria.includes("Tech"));
+
+// every: todos cumplen la condicion
+const todosCostos = productos.every(p => p.precio > 20);
+
+// Recursividad vs iteracion 
