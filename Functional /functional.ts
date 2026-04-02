@@ -80,4 +80,20 @@ const hayTech = productos.some(p => p.categoria.includes("Tech"));
 // every: todos cumplen la condicion
 const todosCostos = productos.every(p => p.precio > 20);
 
-// Recursividad vs iteracion 
+// Recursión vs iteración
+
+// Iterativo 
+function factorialIter(n: number): number {
+    let result = 1;
+    for (let i = 2; i <= n; i++){
+        result *= i;
+    }
+    return result;
+}
+
+// Recursivo
+function factorialRec(n: number): number {
+    return n <= 1 ? 1 : n * factorialRec(n - 1);
+}
+
+
